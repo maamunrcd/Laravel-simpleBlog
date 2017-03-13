@@ -3,7 +3,18 @@
 <div class="col-sm-8 blog-main">
     <div class="blog-post">
         <div class="post_item">
-            <h2 class="blog-post-title"><a href="/posts/{{$iddata->id}}">{{$iddata->title}}</a></h2>
+            <h2 class="blog-post-title"><a href="/posts2/{{$iddata->id}}">{{$iddata->title}}</a></h2>
+            <ul>
+                 <li>
+                @if(count($iddata->tags))
+                @foreach ($iddata->tags as $tag)
+               
+                    <a href="/posts2/tags/{{$tag->name}}">{{$tag->name}},</a>
+                
+                @endforeach
+                @endif
+                </li>
+            </ul>
             <p class="blog-post-meta">{{$iddata->user->name}} On {{$iddata->created_at->toFormattedDateString()}}</p>
             <p>{{$iddata->body}}</p>
             <div class="comments">

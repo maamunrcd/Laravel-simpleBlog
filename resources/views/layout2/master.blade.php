@@ -13,7 +13,7 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- Custom styles for this template -->
     <link href="/css/blog.css" rel="stylesheet">
 </head>
@@ -21,7 +21,16 @@
 <body>
 
 @include('partial2.nav')
-
+            <script>
+            $(document).ready(function(){
+                $('#flash-message').delay(500).fadeIn(250).delay(5000).fadeOut(500);
+            });
+    </script>
+@if($flash=session('message'))
+    <div id="flash-message" class="alert alert-success" role="">
+        {{$flash}}
+    </div>
+@endif
 <div class="blog-header">
     <div class="container">
         <h1 class="blog-title">The Bootstrap Blog</h1>

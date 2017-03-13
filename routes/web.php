@@ -1,5 +1,14 @@
 <?php
+////App::bind('App\Billing\Stripe', function(){
+////   return new \App\Billing\Stripe(config('services.stripe.secret'));
+////});
 
+//
+////$stripe=App::make('App\Billing\Stripe');
+//$stripe=resolve('App\Billing\Stripe');
+//$stripe=app('App\Billing\Stripe');
+//App::instance('App\Billing\Stripe',$stripe);
+//dd($stripe);
 Route::get('/', function () {
     return view('welcome');
 });
@@ -8,6 +17,10 @@ Route::get('/tasks/{id}','TasksController@show');
 Route::get('/posts','PostsController@index');
 Route::get('/posts/{postId}','PostsController@show');
 Route::get('/posts2','PostsController2@index')->name('home');
+
+//Tag Rounte
+Route::get('/posts2/tags/{tag}','TagsController@index');
+
 Route::get('/posts2/create','PostsController2@create');
 Route::post('/posts2','PostsController2@store');
 Route::get('/posts2/{id}','PostsController2@view');

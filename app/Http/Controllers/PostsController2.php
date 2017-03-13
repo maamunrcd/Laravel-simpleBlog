@@ -2,21 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Cache\Repository;
 use Illuminate\Http\Request;
 use App\Post;
+use carbon\carbon;
+use App\Repositories\Posts;
 
 class PostsController2 extends Controller {
 
     public function __construct() {
-        $this->middleware('auth')->except('index', 'view');
+        $this->middleware('auth')->except('index', 'view', 'indexByTag');
     }
 
-    public function index() {
+    public function index(Posts $posts) {
+        $posts=$posts->all();
+        //$posts=(new \App\Repositories\Posts)->all();
+        //Try this using filter method.. Methos call post model
+
+       /*=====This variable compe form post model
+        $posts=Post::latest()
+            ->filter(request(['month','year']))
+            ->get();
+        */
+
+        /*archive data*/
+        $archives=Post::archives();
         //$posts = Post::all();
-        $posts = Post::latest()->get(); //Show the last inserted data Desending order:)
+        //$posts = Post::latest()->get(); //Show the last inserted data Desending order:)
+//        $posts=Post::latest();
+//        if($month=request('month')){
+//            $posts->whereMonth('created_at',carbon::parse($month)->month);
+//        }
+//        if($year=request('year')){
+//            $posts->whereYear('created_at',carbon::parse($year)->year);
+//        }
+//        $posts=$posts->get();
+
+
         return view('posts2.index', compact('posts'));
     }
-
     public function create() {
         return view('posts2.create');
     }
@@ -45,8 +69,8 @@ class PostsController2 extends Controller {
         auth()->user()->publish(
                 new Post(request(['title','body']))
         );
-
-
+        //Alert Message Show.....
+        session()->flash('message','Your Post Published');
         //========3 way data with any validaction
 //        Post::create(request()->all());
         return redirect()->home();
