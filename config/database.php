@@ -45,7 +45,7 @@ return [
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'laracost'),
             'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', '007'),
+            'password' => env('DB_PASSWORD', '1234'),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
